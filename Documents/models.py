@@ -15,7 +15,7 @@ class Document(models.Model):
     Aerodrome_Entity = models.ForeignKey(Aerodrome_Entity,related_name='Reports',null=True,on_delete=models.SET_NULL)
     Aerodrome= models.ForeignKey(Aerodrome, related_name='Reports', null=True, on_delete=models.SET_NULL)
     class Meta:
-        ordering=['pk']
+        ordering=['id']
     def __str__(self)->str:
         return self.name
 

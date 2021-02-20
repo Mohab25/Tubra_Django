@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import Reference
 
-# Register your models here.
+class ReferenceAdmin(admin.ModelAdmin):
+    fields=('Name','Reference_File','Aerodrome_Entity')
+
+admin.site.register(Reference,ReferenceAdmin)
