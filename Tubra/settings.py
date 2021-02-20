@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'CAD',
     'Employee',
     'Project',
-    'References'
+    'References',
+    'City_features'
 ]
 
 MIDDLEWARE = [

@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import Aerodrome
 
-# Register your models here.
+class AerodromeAdmin(admin.ModelAdmin):
+    fields=['Name']
+
+admin.site.register(Aerodrome,AerodromeAdmin)
