@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     'rest_framework',
     'corsheaders',
+    'leaflet',
     'Aerodrome',
     'Aerodrome_features',
     'Documents',
@@ -142,3 +143,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000'
 ] 
 CORS_ALLOWED_ORIGINS_ALL=True
+
+LEAFLET_CONFIG={
+    'DEFAULT_ZOOM':5
+}

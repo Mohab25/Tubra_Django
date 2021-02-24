@@ -8,18 +8,20 @@ class Aerodrome_Part(models.Model):
 
 class Aerodrome_Entity(models.Model):
     Aerodrome= models.ForeignKey(Aerodrome, related_name='Aerodrome_Entity', null=True, on_delete=models.SET_NULL)
-    Feature_Name = models.CharField(max_length=500)
+    Feature_Name = models.CharField(max_length=500,null=True)
     Aerodrome_Part_ID = models.ForeignKey(Aerodrome_Part,null=True,on_delete=models.SET_NULL)
-    geom =  models.GeometryCollectionField() # this is tricky, i think i need inheritance here (point,line..)
-    Entity_Condition = models.CharField(max_length=100)
-    Survey_Date = models.DateTimeField()
-    Description = models.TextField()
+    Category = models.CharField(max_length=300,null=True)
+    Elevation = models.FloatField(null=True)
+    geom =  models.GeometryField(null=True)
+    Entity_Condition = models.CharField(max_length=100,null=True)
+    Survey_Date = models.DateField(null=True)
+    Description = models.TextField(null=True)
 
     class Meta:
-        ordering=['Feature_Name']
+        ordering=['id']
     
-    def __str__(self)->str:
-        return self.Feature_Name
+    # def __str__(self)->str:
+    #     str(self.id)
 
 
 class Pavement_Construction(models.Model):

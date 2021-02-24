@@ -1,10 +1,11 @@
 from django.contrib import admin
 from .models import *
+from leaflet.admin import LeafletGeoAdmin
 
 class Aerodrome_Part_Admin(admin.ModelAdmin):
     list_display = [field.name for field in Aerodrome_Part._meta.fields]
 
-class Aerodrome_Entity_Admin(admin.ModelAdmin):
+class Aerodrome_Entity_Admin(LeafletGeoAdmin):
     list_display = [field.name for field in Aerodrome_Entity._meta.fields]
 
 class Pavement_Construction_Admin(admin.ModelAdmin):
