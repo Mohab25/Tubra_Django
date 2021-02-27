@@ -24,6 +24,16 @@ class AerodromeFeaturesListView(generics.ListCreateAPIView):
     serializer_class = FeatureSerializer
     name = 'Aerodrome_Features_List_View'
 
+class AerodromeFeaturesDetailsView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Aerodrome_Entity.objects.all()
+    serializer_class = FeatureSerializer
+    name = 'aerodrome_entity-detail'
+
+class AerodromeFeaturesPOI(generics.ListCreateAPIView):
+    queryset = Aerodrome_Entity.objects.filter(Aerodrome=1).exclude(Category='Aerodrome Builds')
+    serializer_class = FeatureSerializer
+    name = 'aerodrome_entity_poi-list'
+
 class Aerodrome_Entity_Image_Detail_View(generics.RetrieveUpdateDestroyAPIView):
     queryset = Aerodrome_Entity.objects.all()
     serializer_class = Aerodrome_Entity_Image_Serializer

@@ -25,7 +25,7 @@ class Aerodrome_Entity(models.Model):
 
 
 class Pavement_Construction(models.Model):
-    Aerodrome_Entity = models.OneToOneField(Aerodrome_Entity,null=True,on_delete=models.SET_NULL)
+    Aerodrome_Entity = models.ForeignKey(Aerodrome_Entity,null=True,on_delete=models.SET_NULL)
     Pavement_Name = models.CharField(max_length=100)
     Width = models.FloatField(null=True)
     Shoulder_Width = models.FloatField(null=True)
@@ -56,7 +56,7 @@ class Pavement_Construction(models.Model):
     
 
 class Aerodrome_Utility_Pole(models.Model):
-    Aerodrome_Entity = models.OneToOneField(Aerodrome_Entity,null=True,on_delete=models.SET_NULL)
+    Aerodrome_Entity = models.ForeignKey(Aerodrome_Entity,null=True,on_delete=models.SET_NULL)
     Tension_Types = [('H','High Tension'),('L','Low Tension'),('B','High/Low Tension')]
     Tension_Type = models.CharField(max_length=1,choices=Tension_Types)
     Cable_Size = models.FloatField()
@@ -66,26 +66,26 @@ class Aerodrome_Utility_Pole(models.Model):
     Pole_geom = models.PointField()
 
 class Aerodrome_Utility_Electric_Cable(models.Model):
-    Aerodrome_Entity = models.OneToOneField(Aerodrome_Entity,null=True,on_delete=models.SET_NULL)
+    Aerodrome_Entity = models.ForeignKey(Aerodrome_Entity,null=True,on_delete=models.SET_NULL)
     Cable_Size= models.FloatField()
     Remark = models.TextField()
     Cable_geom = models.LineStringField()
 
 
 class Aerodrome_Utility_Water_Line(models.Model):
-    Aerodrome_Entity = models.OneToOneField(Aerodrome_Entity,null=True,on_delete=models.SET_NULL)
+    Aerodrome_Entity = models.ForeignKey(Aerodrome_Entity,null=True,on_delete=models.SET_NULL)
     Line_Size= models.FloatField()
     Remark = models.TextField()
     Line_geom = models.LineStringField()
 
 class Aerodrome_Utility_Gas_Line(models.Model):
-    Aerodrome_Entity = models.OneToOneField(Aerodrome_Entity,null=True,on_delete=models.SET_NULL)
+    Aerodrome_Entity = models.ForeignKey(Aerodrome_Entity,null=True,on_delete=models.SET_NULL)
     Line_Size= models.FloatField()
     Remark = models.TextField()
     Line_geom = models.LineStringField()
 
 class Aerodrome_Utility_Sewage_Line(models.Model):
-    Aerodrome_Entity = models.OneToOneField(Aerodrome_Entity,null=True,on_delete=models.SET_NULL)
+    Aerodrome_Entity = models.ForeignKey(Aerodrome_Entity,null=True,on_delete=models.SET_NULL)
     Line_Size= models.FloatField()
     Remark = models.TextField()
     Line_geom = models.LineStringField()
