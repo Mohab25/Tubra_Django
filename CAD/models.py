@@ -14,7 +14,7 @@ class DrawingSeries(models.Model):
 
 class Drawing(models.Model):
     Title = models.CharField(max_length=100)
-    CAD_file = models.ImageField(null=True)
+    CAD_file = models.ImageField(null=True,max_length=500)
     Number_of_issuance = models.IntegerField(null=True)
     Drawing_series = models.ForeignKey(DrawingSeries,related_name='drawing_series',null=True,on_delete=models.SET_NULL)
     Aerodrome_Entity = models.ForeignKey(Aerodrome_Entity,related_name='CAD_Drawing',null=True, on_delete = models.SET_NULL)

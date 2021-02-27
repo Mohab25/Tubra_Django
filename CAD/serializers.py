@@ -2,13 +2,13 @@ from rest_framework import serializers
 from .models import * 
 
 class DrawingSeriesSerializer(serializers.HyperlinkedModelSerializer):
-    drawings = serializers.HyperLinkedRelatedField(read_only=True)
+    drawings = serializers.HyperlinkedRelatedField(read_only=True,view_name='drawing-list')
     class Meta:
         model = DrawingSeries
-        fields=('pk','url','name','drawings')
+        fields='__all__'
 
 class DrawingsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Drawing 
-        fields=('pk', 'url', 'name', 'tile_file', 'drawing_series')
+        fields='__all__'
 
