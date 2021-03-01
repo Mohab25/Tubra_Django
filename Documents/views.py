@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView
 from .models import *
 from .serializers import *
-
+from .file_reader import docx_reader
 
 # either you use a class based views or function views, and class based views either to
 #  use django view or rest_framework class based generic api views 
@@ -16,6 +16,14 @@ class DocumentList(ListCreateAPIView):
     # and renders them 
     # and if it's a post request, it parses the request.data, serialize it and saves it
     # to the database.  
+    def get_queryset(self):
+        title = self.request.query_params.get('title')
+        title = title.strip('/')
+        if title != '':
+            queryset = Document.objects.filter(Name__istartswith=title)
+            return queryset
+        else:
+            pass
 
 class WordDocumentList(ListCreateAPIView):
     queryset = Document.objects.filter(Document_type=1)
@@ -33,11 +41,11 @@ class PDFDocumentList(ListCreateAPIView):
     name = 'pdf_document-list' 
 
 class DocumentDetail(RetrieveUpdateDestroyAPIView):
-    model = Document 
+    queryset = Document.objects.all() 
     serializer_class = DocumentSerializer
     name = 'document-detail'
 
 class DocumentTypeDetail(RetrieveUpdateDestroyAPIView):
-    model = Document 
+    queryset = Document_Type.objects.all()
     serializer_class = DocumentTypeSerializer
     name = 'document_type-detail'

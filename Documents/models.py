@@ -10,7 +10,7 @@ class Document_Type(models.Model):
 
 class Document(models.Model):
     Name = models.CharField(max_length=300)
-    Document_type = models.ForeignKey(Document_Type,related_name='Reports',null=True,on_delete=models.SET_NULL)
+    Document_type = models.ForeignKey(Document_Type,null=True,on_delete=models.SET_NULL)
     Document_file = models.FileField(max_length=500)
     Aerodrome_Entity = models.ForeignKey(Aerodrome_Entity,related_name='Reports',null=True,on_delete=models.SET_NULL)
     Aerodrome= models.ForeignKey(Aerodrome, related_name='Reports', null=True, on_delete=models.SET_NULL)
