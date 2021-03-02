@@ -1,9 +1,10 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView
 from .models import *
 from .serializers import *
 from .file_reader import docx_reader
-
+import json
 # either you use a class based views or function views, and class based views either to
 #  use django view or rest_framework class based generic api views 
 
@@ -49,3 +50,11 @@ class DocumentTypeDetail(RetrieveUpdateDestroyAPIView):
     queryset = Document_Type.objects.all()
     serializer_class = DocumentTypeSerializer
     name = 'document_type-detail'
+
+def get_word_content(request,pk):
+    print(pk)
+    word_file = Document.objects.get(id=pk)
+    json_content = docx_reader(word_file.Document_file)
+    doc = {'title':word_file.Name,'content':json_content}
+    doc = json.dumps(doc)
+    return HttpResponse(doc)
