@@ -8,6 +8,6 @@ urlpatterns=[
     path('pdf_docs/',PDFDocumentList.as_view(),name='pdf_document-list'),
     re_path(r'document/(?P<pk>\d+)/$',DocumentDetail.as_view(),name='document-detail'),
     re_path(r'doc_type/(?P<pk>\d+)/$',DocumentTypeDetail.as_view(),name='document_type-detail'),
-    re_path(r'word_doc/(?P<pk>\d+)/$',get_word_content,name='ms_word_document-content'),
+    re_path(r'doc_content/(?P<pk>\d+)/$',doc_content,name='ms_document-content'),
 
 ]
