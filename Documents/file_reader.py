@@ -21,9 +21,14 @@ class DataReader:
         return document
         
     def xlsx_reader(self):
-        path = self.doc.Document_file
         xlsx_file = self.doc.Document_file
         xlsx_file = pandas.read_excel(xlsx_file)
         xlsx = {'title':self.doc.Name,'content':xlsx_file.to_json()}
         xlsx = json.dumps(xlsx)
         return xlsx
+
+    def pdf_reader(self):
+        pdf_file_name = self.doc.Name
+        pdf_file_path = 'http://localhost:8000/media/'+pdf_file_name+'.pdf'
+        content = json.dumps({'path':pdf_file_path})
+        return content

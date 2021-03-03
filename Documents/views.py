@@ -60,6 +60,7 @@ def doc_content(request,pk):
         content = content.docx_reader()
     elif str(_file.Document_type)=='Excel':
         content = content.xlsx_reader()
-
-    print(content)
+    elif str(_file.Document_type)=='PDF':
+        content = content.pdf_reader()
+    print('Document',content)
     return HttpResponse(content)
