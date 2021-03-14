@@ -5,7 +5,7 @@ git branch -d main
 git branch main
 git checkout main
 git push origin main
-git git checkout master
+git checkout master
 git branch -d main
 echo "end successfully !"
  
