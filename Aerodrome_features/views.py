@@ -1,6 +1,6 @@
 from django.shortcuts import render 
-from .models import Aerodrome_Entity
-from .serializers import FeatureSerializer, Aerodrome_Entity_Image_Serializer
+from .models import *
+from .serializers import *
 from rest_framework import generics
 # from rest_framework.decorators import api_view
 # from rest_framework.Response import Response
@@ -28,6 +28,12 @@ class AerodromeFeaturesDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Aerodrome_Entity.objects.all()
     serializer_class = FeatureSerializer
     name = 'aerodrome_entity-detail'
+
+class AerodromeFeaturesPavementConstructions(generics.ListCreateAPIView):
+    queryset = Pavement_Construction.objects.all()
+    serializer_class = Pavement_Construction_Serializer
+    name = 'pavement_constructions'
+
 
 class AerodromeFeaturesPOI(generics.ListCreateAPIView):
     queryset = Aerodrome_Entity.objects.filter(Aerodrome=1).exclude(Category='Aerodrome Builds')
