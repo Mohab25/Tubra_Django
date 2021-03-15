@@ -9,7 +9,7 @@ class Aerodrome_Part_Serializer(serializers.ModelSerializer):
         model = Aerodrome_Part
         fields = '__all__'
 
-class FeatureSerializer(serializers.ModelSerializer):
+class FeatureSerializer(GeoFeatureModelSerializer):
     # Pavement_Construction_set = serializers.SlugRelatedField(slug_field='Pavement_Name',many=True, read_only=True)
     # Aerodrome_Utility_Pole_set = serializers.PrimaryKeyRelatedField(read_only=True,many=True,allow_null=True)
     # Aerodrome_Utility_Electric_Cable_set = serializers.PrimaryKeyRelatedField(read_only=True,many=True,allow_null=True)
@@ -24,6 +24,7 @@ class FeatureSerializer(serializers.ModelSerializer):
    
     class Meta:
         model = Aerodrome_Entity 
+        geo_field = 'geom'
         fields=['Aerodrome','Feature_Name','Aerodrome_Part_ID','Category','Elevation','geom','Entity_Condition','Survey_Date','Description','pavement_construction_set','aerodrome_utility_pole_set','aerodrome_utility_electric_cable_set','aerodrome_utility_water_line_set','aerodrome_utility_gas_line_set','aerodrome_utility_sewage_line_set','aerodrome_entity_image_set']
 
 class Pavement_Construction_Serializer(GeoFeatureModelSerializer):
