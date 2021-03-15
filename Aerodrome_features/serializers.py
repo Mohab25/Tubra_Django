@@ -1,4 +1,5 @@
 from rest_framework import serializers 
+from rest_framework_gis.serializers import GeoFeatureModelSerializer
 from .models import Aerodrome_Part
 from .models import Aerodrome_Entity, Aerodrome_Utility_Pole, Pavement_Construction, Aerodrome_Utility_Electric_Cable, Aerodrome_Utility_Water_Line, Aerodrome_Utility_Gas_Line, Aerodrome_Utility_Sewage_Line, Aerodrome_Entity_Image
 
@@ -25,10 +26,11 @@ class FeatureSerializer(serializers.ModelSerializer):
         model = Aerodrome_Entity 
         fields=['Aerodrome','Feature_Name','Aerodrome_Part_ID','Category','Elevation','geom','Entity_Condition','Survey_Date','Description','pavement_construction_set','aerodrome_utility_pole_set','aerodrome_utility_electric_cable_set','aerodrome_utility_water_line_set','aerodrome_utility_gas_line_set','aerodrome_utility_sewage_line_set','aerodrome_entity_image_set']
 
-class Pavement_Construction_Serializer(serializers.ModelSerializer):
-    Aerodrome_Entity_Name = serializers.SlugRelatedField(slug_field='Feature_Name',read_only=True) # this will be the same as StringRelatedField because the __str__ method of the Aerodrome_Entity returns the Feature_Name
+class Pavement_Construction_Serializer(GeoFeatureModelSerializer):
+    Aerodrome_Entity = serializers.SlugRelatedField(slug_field='Feature_Name',read_only=True) # this will be the same as StringRelatedField because the __str__ method of the Aerodrome_Entity returns the Feature_Name
     class Meta:
         model = Pavement_Construction
+        geo_field = 'Pavement_geom'
         fields = '__all__'
     
 # class Aerodrome_Utility_Pole_Serializer(serializers.ModelSerializer):
