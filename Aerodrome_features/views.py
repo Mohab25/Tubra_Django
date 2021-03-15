@@ -35,6 +35,11 @@ class AerodromeFeaturesPavementConstructions(generics.ListCreateAPIView):
     name = 'pavement_constructions'
 
 
+class AerodromeFeaturesPavementConstructionDetails(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Pavement_Construction.objects.all()
+    serializer_class = Pavement_Construction_Serializer
+    name = 'pavement_construction-details'
+
 class AerodromeFeaturesPOI(generics.ListCreateAPIView):
     queryset = Aerodrome_Entity.objects.filter(Aerodrome=1).exclude(Category='Aerodrome Builds')
     serializer_class = FeatureSerializer
