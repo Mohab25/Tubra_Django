@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'Employee',
     'Project',
     'References',
-    'City_features'
+    'City_features',
+    'spatial_analysis',
 ]
 
 MIDDLEWARE = [
