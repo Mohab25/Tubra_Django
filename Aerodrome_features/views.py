@@ -1,7 +1,12 @@
+from django.http.response import HttpResponse
 from django.shortcuts import render 
 from .models import *
 from .serializers import *
 from rest_framework import generics
+from django.apps import apps
+import re
+import json
+
 # from rest_framework.decorators import api_view
 # from rest_framework.Response import Response
 # @api_view(['GET','POST'])
@@ -60,3 +65,19 @@ class Aerodrome_Entity_Image_Detail_View(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = Aerodrome_Entity_Image_Serializer
     name = 'Aerodrome_Entity_Image_Detail_View'
 
+
+
+def get_fields_name_for_forms(req,modelName):
+    model = apps.get_model('Aerodrome_features', modelName)
+    fieldsNames = model._meta.get_fields()
+    names=[]
+    for i in fieldsNames:
+        i = str(i)
+        for l in ['Aerodrome_features.Aerodrome_Entity.','>','<','ManyToOneRel','ManyToManyRel','Aerodrome_features.',':','_','aerodromeutility']:
+            if i.find(l)+1:
+                i= i.replace(l,'')
+            else:
+                continue
+        names.append(re.sub(r'\s+','',i))
+    names=json.dumps({'form_titles':names})
+    return HttpResponse(names)
