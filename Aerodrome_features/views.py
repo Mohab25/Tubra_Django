@@ -3,6 +3,8 @@ from django.shortcuts import render
 from .models import *
 from .serializers import *
 from rest_framework import generics
+from rest_framework.decorators import api_view
+from rest_framework import status
 from django.apps import apps
 import re
 import json
@@ -65,6 +67,17 @@ class Aerodrome_Entity_Image_Detail_View(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = Aerodrome_Entity_Image_Serializer
     name = 'Aerodrome_Entity_Image_Detail_View'
 
+@api_view(['POST'])
+def add_aerodrome_features(req):
+    # getting the data from the req, serialize it, check if valid and save to the model 
+    data = req.data
+    print('The post data',data)
+    serialized_data = FeatureSerializer(data=data)
+    if serialized_data.is_valid():
+        serialized_data.save()
+        return HttpResponse(serialized_data.data,status.HTTP_201_CREATED)
+    else:
+        return HttpResponse(serialized_data.errors,status.HTTP_400_BAD_REQUEST)
 
 
 def get_fields_name_for_forms(req,modelName):
@@ -73,7 +86,7 @@ def get_fields_name_for_forms(req,modelName):
     names=[]
     for i in fieldsNames:
         i = str(i)
-        for l in ['Aerodrome_features.Aerodrome_Entity.','>','<','ManyToOneRel','ManyToManyRel','Aerodrome_features.',':','_','aerodromeutility']:
+        for l in ['Aerodrome_features.Aerodrome_Entity.','>','<','ManyToOneRel','ManyToManyRel','Aerodrome_features.',':','aerodromeutility']:
             if i.find(l)+1:
                 i= i.replace(l,'')
             else:
