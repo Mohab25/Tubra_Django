@@ -5,6 +5,8 @@ from Aerodrome_features.models import Aerodrome_Entity
 from Aerodrome.models import Aerodrome
 from Documents.views import *
 from rest_framework.test import APIClient
+import json
+import docx
 
 class UrlsTest(TestCase):
     def setUp(self) -> None:
@@ -39,8 +41,15 @@ class UrlsTest(TestCase):
         # pdf docs
         cls.doc5 = Document.objects.create(Name='Doc5',Document_type=cls.doc_type3,Document_file='file5',Aerodrome_Entity=cls.aerodrome_feat,Aerodrome=cls.aerodrome)
         cls.doc6 = Document.objects.create(Name='Doc6',Document_type=cls.doc_type3,Document_file='file6',Aerodrome_Entity=cls.aerodrome_feat,Aerodrome=cls.aerodrome)
-
-       
+        # reading a file to check it's content
+        cls.file_path = '/home/mohab/Main Folder/Master degree/Research/Tubra/venv/Tubra/media/Design and Construction Supervision of Zalingi.docx'
+        cls._file = docx.Document(cls.file_path)
+        cls.text=''
+        for p in cls._file.paragraphs:
+            cls.text+= p.text
+        cls.doc7 = Document.objects.create(Name='Doc7',Document_type=cls.doc_type,Document_file=cls.file_path,Aerodrome_Entity=cls.aerodrome_feat,Aerodrome=cls.aerodrome)
+    
+    
     def test_docs_list(self):
         
         """ testing the documents list returned be DocumentList view, it represent all items being returned from a
@@ -52,7 +61,7 @@ class UrlsTest(TestCase):
         # test the view name
         self.assertEqual(res.resolver_match.func.__name__,DocumentList.as_view().__name__)
         # test the content size of the response
-        self.assertEqual(len(res.json()),6)
+        self.assertEqual(len(res.json()),7)
         # checking the content first item
         items = res.json()
         d1 = items[0]
@@ -68,7 +77,7 @@ class UrlsTest(TestCase):
         # test the view name
         self.assertEqual(res.resolver_match.func.__name__,WordDocumentList.as_view().__name__)
         # test the conetnt size of the response
-        self.assertEqual(len(res.json()),2)
+        self.assertEqual(len(res.json()),3)
         # test content second item
         d2 = res.json()[1]
         self.assertEqual((d2['pk'],d2['Name'],d2['url']),(2,'Doc2','http://testserver/Reports/document/2/'))
@@ -130,3 +139,14 @@ class UrlsTest(TestCase):
         self.assertEqual((d1['pk'],d1['Doc_type']),(1,'word'))
 
 
+    def test_doc_content(self):
+        """ testing the actual content of a file, according to it's pk
+        """
+        res = self.c.get(reverse('document-content',kwargs={'pk':self.doc7.id}))
+        # test the response status
+        self.assertEqual(res.status_code,200)
+        # test the view name 
+        self.assertEqual(res.resolver_match.func.__name__,doc_content.__name__)
+        # test the first item of the response
+        d1 = json.loads(res.content)
+        self.assertEqual(d1['content'],self.text)
