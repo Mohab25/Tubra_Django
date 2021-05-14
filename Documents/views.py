@@ -52,7 +52,10 @@ class DocumentTypeDetail(RetrieveUpdateDestroyAPIView):
     name = 'document_type-detail'
 
 def doc_content(request,pk):
-    print(pk)
+    """
+        the view reads through the file and returns the actual content, 
+        according to the file type a specific reader is applied.
+    """
     _file = Document.objects.get(id=pk)
     content = DataReader(_file)
     print(str(_file.Document_type))
