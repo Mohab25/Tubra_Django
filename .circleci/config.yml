@@ -19,9 +19,12 @@ jobs:
           pkg-manager: pip
       - run:
           name: install gdal depency
-          command: | 
+          command: |
+            python3 -m venv venv
             sudo apt-get update \
             && sudo apt-get install -y binutils libproj-dev gdal-bin python3-gdal 
       - run:
           name: Run tests
-          command: python manage.py test
+          command: | 
+            . venv/bin/activate
+            python manage.py test
