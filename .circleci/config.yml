@@ -20,7 +20,7 @@ jobs:
       - run:
           name: install gdal depency
           command: | 
-            apt update \
+            apt-get update \
             && apt-get install -y binutils libproj-dev gdal-bin python-gdal python3-gdal 
       - run:
           name: Run tests
