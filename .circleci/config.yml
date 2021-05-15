@@ -21,7 +21,7 @@ jobs:
           name: install gdal depency
           command: | 
             sudo apt-get update \
-            && sudo apt-get install -y binutils libproj-dev gdal-bin python-gdal python3-gdal 
+            && sudo apt-get install -y binutils libproj-dev gdal-bin python3-gdal 
       - run:
           name: Run tests
           command: python manage.py test
