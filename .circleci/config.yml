@@ -2,12 +2,14 @@ version: 2.1
 jobs:
   first_job:
     docker:
-      - image: circleci/django:latest
+      - image: circleci/django
     steps:
       - checkout 
       - run: echo "trying to understand this"
   
   second_job:
+    docker:
+      - image:circleci/scratch
     steps:
       - checkout
       - run: echo "that one who called binga"
