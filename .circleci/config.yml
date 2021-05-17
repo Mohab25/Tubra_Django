@@ -1,32 +1,13 @@
 version: 2.1
-
-orbs:
-  python: circleci/python@1.2
-  
-workflows:
-  build_and_test:
-    jobs:
-      - build-and-test
-
-
 jobs:
-  build-and-test:
+  first_job:
     docker:
-      - image: cimg/python:3.8
+      - image: circleci/django:latest
+    steps:
+      - checkout 
+      - run: echo "trying to understand this"
+  
+  second_job:
     steps:
       - checkout
-      - python/install-packages:
-          pkg-manager: pip
-      - run:
-          name: install depencies
-          command: |
-            sudo apt-get update \
-            && sudo apt-get install -y binutils libproj-dev gdal-bin python3-gdal
-            python3 -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
-      - run:
-          name: Run tests
-          command: | 
-            . venv/bin/activate
-            python manage.py test Documents.tests.test_urls
+      - run: echo "that one who called binga"
