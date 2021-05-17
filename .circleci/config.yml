@@ -9,7 +9,7 @@ jobs:
   
   second_job:
     docker:
-      - image:circleci/scratch
+      - image:circleci/node
     steps:
       - checkout
       - run: echo "that one who called binga"
