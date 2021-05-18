@@ -3,14 +3,8 @@ version: 2.1
 orbs:
   python: circleci/python@1.2
   
-workflows:
-  main:
-    jobs:
-      - build-and-test
-
-
 jobs:
-  build-and-test:
+  build:
     docker:
       - image: cimg/python:3.8
     steps:
@@ -18,5 +12,28 @@ jobs:
       - python/install-packages:
           pkg-manager: pip
       - run:
-          name: Run tests
-          command: unittest
+        name: install libs
+        command: | 
+          sudo apt update && sudo apt install -y binutils libproj-dev gdal-bin python3-gdal
+          python3 -m venv venv
+          . venv/bin/activate 
+          pip install -r requirements.txt 
+    
+  test:
+    docker:
+      - image: cimg/python:3.8   
+    steps:
+      - checkout
+      - run: 
+        name: run python tests
+        command: | 
+          . venv/bin/activate
+          python manage.py test
+
+workflows:
+  main:
+    jobs:
+      - build
+      - test:
+        requires:
+          - build
