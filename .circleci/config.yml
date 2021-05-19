@@ -10,8 +10,8 @@ jobs:
       
         environment:
           POSTGRES_USER: postgres
-          POSTGRES_DB: tubra
-          POSTGRES_PASSWORD: m1k2h3
+          POSTGRES_DB: circle-test_test
+          POSTGRES_PASSWORD: postgres
     
     steps:
       - checkout
