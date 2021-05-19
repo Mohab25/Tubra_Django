@@ -2,7 +2,6 @@ version: 2.1
 
 orbs:
   python: circleci/python@1.2
-  
 jobs:
   build:
     docker:
@@ -14,31 +13,29 @@ jobs:
           pkg-manager: pip
       
       - run:
-        name: install libs
-        command: | 
-          sudo apt update && sudo apt install -y binutils libproj-dev gdal-bin python3-gdal
-          python3 -m venv venv
-          . venv/bin/activate 
-          pip install -r requirements.txt
+          name: install
+          command: | 
+            sudo apt update && sudo apt install -y binutils libproj-dev gdal-bin python3-gdal
+            python3 -m venv venv
+            . venv/bin/activate 
+            pip install -r requirements.txt
       - run: 
-        name: migrate to postgre
-        command: | 
-          python manage.py migrate       
+          name: migrate
+          command: | 
+            python manage.py migrate       
   test:
     docker:
       - image: cimg/python:3.8   
     steps:
       - checkout
       - run: 
-        name: run python tests
-        command: | 
-          . venv/bin/activate
-          python manage.py test
+          name: run
+          command: | 
+            . venv/bin/activate
+            python manage.py test
 
 workflows:
+  version: 2.1
   main:
     jobs:
       - build
-      - test:
-        requires:
-          - build
