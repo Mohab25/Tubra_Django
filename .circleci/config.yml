@@ -11,7 +11,7 @@ jobs:
         environment:
           POSTGRES_USER: circleci
           POSTGRES_DB: circlecitest
-
+          POSTGRES_PASSWORD: postgres
     
     steps:
       - checkout
