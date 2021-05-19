@@ -9,7 +9,7 @@ jobs:
       - image: circleci/postgres:latest-postgis
       
         environment:
-          POSTGRES_USER: circleci
+          POSTGRES_USER: root
           POSTGRES_DB: circlecitest
           POSTGRES_PASSWORD: postgres
     
