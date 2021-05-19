@@ -9,9 +9,9 @@ jobs:
       - image: circleci/postgres:latest-postgis
       
         environment:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: tubra
-          POSTGRES_PASSWORD: m1k2h3
+          POSTGRES_USER: circleci
+          POSTGRES_DB: circlecitest
+
     
     steps:
       - checkout
