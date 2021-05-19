@@ -7,6 +7,7 @@ jobs:
   build:
     docker:
       - image: cimg/python:3.8
+      - image: circleci/postgres:latest-postgis
     steps:
       - checkout
       - python/install-packages:
@@ -19,16 +20,10 @@ jobs:
           python3 -m venv venv
           . venv/bin/activate 
           pip install -r requirements.txt
-      
       - run: 
         name: migrate to postgre
         command: | 
           python manage.py migrate       
-  db:
-    docker:
-      - image: circleci/postgres:latest-postgis
-    steps:
-      - checkout
   test:
     docker:
       - image: cimg/python:3.8   
@@ -43,10 +38,7 @@ jobs:
 workflows:
   main:
     jobs:
-      - db
-      - build:
-        requires:
-          - db
+      - build
       - test:
         requires:
           - build
