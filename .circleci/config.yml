@@ -10,7 +10,7 @@ jobs:
     steps:
       - checkout
       - run: |
-        echo "B" 
+          echo "B"
   db:
     docker:
       - image: circleci/postgres:latest-postgis
