@@ -22,8 +22,7 @@ jobs:
       
       - run: 
         name: migrate to postgre
-        command: |
-          python manage.py migrate       
+        command: python manage.py migrate       
   db:
     docker:
       - image: circleci/postgres:latest-postgis
