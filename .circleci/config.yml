@@ -15,10 +15,7 @@ jobs:
       - run:
         name: install libs
         command: |
-          sudo apt update && sudo apt install -y binutils libproj-dev gdal-bin python3-gdal
-          python3 -m venv venv
-          . venv/bin/activate 
-          pip install -r requirements.txt
+          echo "binga"
       
       - run: 
         name: migrate to postgre
