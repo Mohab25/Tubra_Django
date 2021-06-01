@@ -9,10 +9,8 @@ jobs:
       - image: cimg/python:3.8
     steps:
       - checkout
-      - run:
-        name: install packages
-        command: |
-          echo "B" 
+      - run: |
+        echo "B" 
   db:
     docker:
       - image: circleci/postgres:latest-postgis
