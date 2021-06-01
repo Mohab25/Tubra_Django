@@ -9,16 +9,7 @@ jobs:
       - image: cimg/python:3.8
     steps:
       - checkout
-      - python/install-packages:
-          pkg-manager: pip
-      
-      - run:
-        name: install libs
-        command: echo "0.8475"
-      
-      - run: 
-        name: migrate to postgre
-        command: python manage.py migrate       
+       
   db:
     docker:
       - image: circleci/postgres:latest-postgis
