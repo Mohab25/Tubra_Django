@@ -24,6 +24,14 @@ jobs:
       - POSTGRES_USER=circleci
     steps:
       - checkout
+  test:
+    docker:
+      - image: cimg/python:3.8 
+    steps:
+      - checkout
+      - run: |
+          . venv/bin/activate
+          python manage.py test
 
 workflows:
   main:
@@ -32,3 +40,6 @@ workflows:
       - build:
           requires:
             - db
+      - test:
+          requires:
+            - build
