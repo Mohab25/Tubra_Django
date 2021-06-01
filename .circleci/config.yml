@@ -27,7 +27,7 @@ jobs:
     docker:
       - image: circleci/postgres:latest-postgis
     environment:
-      - POSTGRES_USER: circleci
+      - POSTGRES_USER=circleci
     steps:
       - checkout
   test:
