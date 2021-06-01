@@ -22,6 +22,8 @@ jobs:
       - image: circleci/postgres:latest-postgis
     environment:
       - POSTGRES_USER=circleci
+      - POSTGRES_PASS=pass_test
+      - POSTGRES_DBNAME=circleci_test
     steps:
       - checkout
   test:
