@@ -25,5 +25,4 @@ urlpatterns = [
     path('AerodromeFeatures/',include('Aerodrome_features.urls')),
     path('CAD/',include('CAD.urls')),
     path('Reports/',include('Documents.urls')),
-    path('spatial_analysis/',include('spatial_analysis.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
