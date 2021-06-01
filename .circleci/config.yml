@@ -29,6 +29,8 @@ jobs:
       - image: circleci/postgres:latest-postgis
     environment:
       POSTGRES_USER: circleci
+    steps:
+      - checkout
   test:
     docker:
       - image: cimg/python:3.8   
