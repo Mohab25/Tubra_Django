@@ -10,7 +10,7 @@ jobs:
     steps:
       - checkout
       - run: |
-          echo "B"
+          sudo apt update && sudo apt install -y binutils libproj-dev gdal-bin python3-gdal
   db:
     docker:
       - image: circleci/postgres:latest-postgis
