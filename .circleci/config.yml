@@ -2,46 +2,45 @@ version: 2.1
 
 orbs:
   python: circleci/python@1.2
+
 jobs:
   build:
     docker:
       - image: cimg/python:3.8
-      - image: circleci/postgres:latest-postgis
-      
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: tubra
-          POSTGRES_PASSWORD: m1k2h3
-    
     steps:
       - checkout
       - python/install-packages:
-          pkg-manager: pip
-      
-      - run:
-          name: install
-          command: | 
-            sudo apt update && sudo apt install -y binutils libproj-dev gdal-bin python3-gdal
-            python3 -m venv venv
-            . venv/bin/activate 
-            pip install -r requirements.txt
-      - run: 
-          name: migrate
-          command: | 
-            python manage.py migrate       
-  test:
+        pkg-manager: pip 
+      - run: |
+          sudo apt update && sudo apt install -y binutils libproj-dev gdal-bin python3-gdal
+          python3 -m venv venv
+          . venv/bin/activate 
+          pip install -r requirements.txt
+          python manage.py migrate 
+  db:
     docker:
-      - image: cimg/python:3.8   
+      - image: circleci/postgres:latest-postgis
+    environment:
+      - POSTGRES_USER=circleci
+      - POSTGRES_PASS=pass_test
+      - POSTGRES_DBNAME=circleci_test
     steps:
       - checkout
-      - run: 
-          name: run
-          command: | 
-            . venv/bin/activate
-            python manage.py test
-
+  test:
+    docker:
+      - image: cimg/python:3.8 
+    steps:
+      - checkout
+      - run: |
+          . venv/bin/activate
+          python manage.py test
 workflows:
-  version: 2.1
   main:
     jobs:
-      - build
+      - db
+      - build:
+          requires:
+            - db
+      - test:
+          requires:
+            - build
