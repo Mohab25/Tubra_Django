@@ -9,6 +9,8 @@ jobs:
       - image: cimg/python:3.8
     environment:
       DATABSE_URL: postgresql://root@localhost/circleci_test?sslmode=disable
+    ports:
+      - '5432:5432'
     steps:
       - checkout
       - python/install-packages:
@@ -26,8 +28,6 @@ jobs:
     environment:
       - POSTGRES_USER=root
       - POSTGRES_DBNAME=circleci_test
-      ports:
-        - '5432:5432'
     steps:
       - checkout
   test:
