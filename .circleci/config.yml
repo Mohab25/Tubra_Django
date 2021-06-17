@@ -25,6 +25,8 @@ jobs:
     environment:
       - POSTGRES_USER=root
       - POSTGRES_DBNAME=circleci_test
+    ports:
+      - "5432:5432"
     steps:
       - checkout
   test:
