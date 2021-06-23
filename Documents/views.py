@@ -58,12 +58,13 @@ def doc_content(request,pk):
     """
     _file = Document.objects.get(id=pk)
     content = DataReader(_file)
-    print(str(_file.Document_type).lower())
-    if str(_file.Document_type)=='word':
+    doc_type = str(_file.Document_type).lower()
+    print(doc_type)
+    if doc_type=='word':
         content = content.docx_reader()
-    elif str(_file.Document_type)=='excel':
+    elif doc_type=='excel':
         content = content.xlsx_reader()
-    elif str(_file.Document_type)=='pdf':
+    elif doc_type=='pdf':
         content = content.pdf_reader()
-    #print('Document',content)
+    print('Document',content)
     return HttpResponse(content)
