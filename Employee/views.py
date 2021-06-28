@@ -1,14 +1,13 @@
-from django.shortcuts import render
 from .models import Employee
-from .serializers import EmployeeSerializer
-from rest_framework import generics
+from .serializers import EmployeeListSerializer, EmployeeDetailsSerializer
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
-class Employee_List(generics.ListCreateAPIView):
-    queryset = Employee.objects.all()
-    serializer_class = EmployeeSerializer
+class Employee_List(ListCreateAPIView):
+    model = Employee
+    serializer_class = EmployeeListSerializer
     name = 'employee-list'
 
-class Employee_List(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Employee.objects.all()
-    serializer_class = EmployeeSerializer
-    name = 'employee-detail'
+class Employee_Details(RetrieveUpdateDestroyAPIView):
+    model = Employee
+    serializer_class = EmployeeDetailsSerializer
+    name = 'employee-details'

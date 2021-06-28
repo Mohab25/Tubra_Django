@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from .models import Drawing,DrawingSeries
-from .serializers import DrawingsSerializer
+from .serializers import DrawingsSerializer, DrawingSeriesSerializer
 import json
 from django.http import HttpResponse
 
@@ -27,10 +27,10 @@ def cad_media_url_fix(request,pk):
 
 class DrawingSeriesList(ListCreateAPIView):
     queryset = DrawingSeries.objects.all() 
-    serializer_class = DrawingsSerializer
+    serializer_class = DrawingSeriesSerializer
     name = 'drawing_series-list'
 
 class DrawingSeriesDetail(RetrieveUpdateDestroyAPIView):
     queryset = DrawingSeries.objects.all()
-    serializer_class = DrawingsSerializer
-    name = 'drawing_series-detail'
+    serializer_class = DrawingSeriesSerializer
+    name = 'drawingseries-detail'
