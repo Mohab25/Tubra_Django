@@ -3,11 +3,11 @@ from .models import Aerodrome
 from .serializers import AerodromeListSerializer, AerodromeDetailsSerializer
 
 class AerodromesListView(ListCreateAPIView):
-    model = Aerodrome
+    queryset = Aerodrome.objects.all()
     serializer_class = AerodromeListSerializer
     name = 'aerodrome-list'
 
 class AerodromeDetailsView(RetrieveUpdateDestroyAPIView):
-    model = Aerodrome
+    queryset = Aerodrome.objects.all()
     serializer_class = AerodromeDetailsSerializer
     name = 'aerodrome-details'

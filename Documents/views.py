@@ -19,6 +19,8 @@ class DocumentList(ListCreateAPIView):
     # to the database.  
     def get_queryset(self):
         title = self.request.query_params.get('title')
+        if title == None:
+            return
         title = title.strip('/')
         if title != '':
             queryset = Document.objects.filter(Name__istartswith=title)

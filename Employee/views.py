@@ -3,11 +3,11 @@ from .serializers import EmployeeListSerializer, EmployeeDetailsSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 class Employee_List(ListCreateAPIView):
-    model = Employee
+    queryset = Employee.objects.all()
     serializer_class = EmployeeListSerializer
     name = 'employee-list'
 
 class Employee_Details(RetrieveUpdateDestroyAPIView):
-    model = Employee
+    queryset = Employee.objects.all()
     serializer_class = EmployeeDetailsSerializer
     name = 'employee-details'

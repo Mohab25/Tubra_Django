@@ -24,7 +24,7 @@ class CADUrlsTest(TestCase):
         cls.drawing_1= Drawing.objects.create(Title='cad1',CAD_file=cls.img,Number_of_issuance=3,Drawing_series=cls.drawing_series_1,Aerodrome_Entity=cls.aerodrome_entity,Author=cls.employee_1)
 
     def test_drawings_lists(self):
-        res = self.c.get(reverse('drawing-list'))
+        res = self.c.get('/CAD/drawings/')
         self.assertEquals(res.status_code,200)
         self.assertEquals(res.resolver_match.func.__name__,DrawingList.as_view().__name__)
 
@@ -34,11 +34,11 @@ class CADUrlsTest(TestCase):
         self.assertEquals(res.resolver_match.func.__name__,DrawingSeriesList.as_view().__name__)
 
     def test_drawing_details(self):
-        res = self.c.get('/CAD/drawing/1/')
+        res = self.c.get('/CAD/drawing/2/')
         self.assertEquals(res.status_code,200)
         self.assertEquals(res.resolver_match.func.__name__,DrawingDetail.as_view().__name__)
 
     def test_drawing_series_details(self):
-        res = self.c.get('/CAD/drawing_series/1/')
+        res = self.c.get(reverse('drawingseries-detail',kwargs={'pk':self.drawing_series_1.id}))
         self.assertEquals(res.status_code,200)
         self.assertEquals(res.resolver_match.func.__name__,DrawingSeriesDetail.as_view().__name__)

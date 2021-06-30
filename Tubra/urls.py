@@ -26,6 +26,6 @@ urlpatterns = [
     path('AerodromeFeatures/',include('Aerodrome_features.urls')),
     path('CAD/',include('CAD.urls')),
     path('Reports/',include('Documents.urls')),
-    path('Employees/',include('Documents.urls')),
+    path('Employees/',include('Employee.urls')),
     path('spatial_analysis/',include('spatial_analysis.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
