@@ -66,5 +66,4 @@ def doc_content(request,pk):
         content = content.xlsx_reader()
     elif doc_type=='pdf':
         content = content.pdf_reader()
-    print('Document',content)
     return HttpResponse(content)

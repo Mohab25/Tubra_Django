@@ -3,6 +3,7 @@ from .models import *
 
 class DrawingSeriesSerializer(serializers.HyperlinkedModelSerializer):
     drawings = serializers.HyperlinkedRelatedField(read_only=True,view_name='drawing-list')
+    id = serializers.ReadOnlyField()
     class Meta:
         model = DrawingSeries
         fields='__all__'
