@@ -4,7 +4,7 @@ from Aerodrome.views import *
 import json
 
 
-class AerodromeUrlsTest(TestCase):
+class AerodromeViewsTest(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.c = Client()

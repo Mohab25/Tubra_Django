@@ -28,5 +28,6 @@ urlpatterns = [
     path('Reports/',include('Documents.urls')),
     path('Employees/',include('Employee.urls')),
     path('Project/',include('Project.urls')),
+    path('City_Features/',include('City_features.urls')),
     path('spatial_analysis/',include('spatial_analysis.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
