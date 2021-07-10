@@ -2,6 +2,7 @@ from django.test import TestCase, Client
 from City_features.models import *
 from City_features.views import *
 from Aerodrome.models import Aerodrome
+import json
 
 class TestCityFeaturesUrls(TestCase):
     @classmethod
@@ -20,40 +21,40 @@ class TestCityFeaturesUrls(TestCase):
     
     def test_facilities_urls(self):
         res = self.c.get('/City_Features/city_facilities/')
-        self.assertTrue(res.status_code==200)
-        self.assertEquals(res.resolver_match.func.__name__,Facilities_List.as_view().__name__)
+        content = json.loads(res.content)
+        self.assertTrue(len(content)>0)
 
     def test_facility_urls(self):
         res = self.c.get(f'/City_Features/city_facility/{self.city_facility.id}/')
-        self.assertTrue(res.status_code==200)
-        self.assertEquals(res.resolver_match.func.__name__,Facility_details.as_view().__name__)
+        content = json.loads(res.content)
+        self.assertEquals((content['City_Name'],content['Facility_Name']),(self.city_facility.City_Name,self.city_facility.Facility_Name))
 
     def test_blocks_urls(self):
         res = self.c.get('/City_Features/city_blocks/')
-        self.assertTrue(res.status_code==200)
-        self.assertEquals(res.resolver_match.func.__name__,Blocks_List.as_view().__name__)
+        content = json.loads(res.content)
+        self.assertTrue(len(content)>0)
 
     def test_block_urls(self):
         res = self.c.get(f'/City_Features/city_block/{self.city_block.id}/')
-        self.assertTrue(res.status_code==200)
-        self.assertEquals(res.resolver_match.func.__name__,Blocks_details.as_view().__name__)
+        content = json.loads(res.content)
+        self.assertEquals((content['City_Name'],content['Block_Name']),(self.city_block.City_Name,self.city_block.Block_Name))
 
     def test_streets_urls(self):
         res = self.c.get('/City_Features/city_streets/')
-        self.assertTrue(res.status_code==200)
-        self.assertEquals(res.resolver_match.func.__name__,Streets_List.as_view().__name__)
+        content = json.loads(res.content)
+        self.assertTrue(len(content)>0)
 
     def test_street_urls(self):
         res = self.c.get(f'/City_Features/city_street/{self.city_street.id}/')
-        self.assertTrue(res.status_code==200)
-        self.assertEquals(res.resolver_match.func.__name__,Streets_details.as_view().__name__)
+        content = json.loads(res.content)
+        self.assertEquals((content['City_Name'],content['Street_Name']),(self.city_street.City_Name,self.city_street.Street_Name))
 
     def test_districts_urls(self):
         res = self.c.get('/City_Features/city_districts/')
-        self.assertTrue(res.status_code==200)
-        self.assertEquals(res.resolver_match.func.__name__,Districts_List.as_view().__name__)
+        content = json.loads(res.content)
+        self.assertTrue(len(content)>0)
 
     def test_district_urls(self):
         res = self.c.get(f'/City_Features/city_district/{self.city_district.id}/')
-        self.assertTrue(res.status_code==200)
-        self.assertEquals(res.resolver_match.func.__name__,Districts_details.as_view().__name__)
+        content = json.loads(res.content)
+        self.assertEquals((content['City_Name'],content['District_Name']),(self.city_district.City_Name,self.city_district.District_Name))
