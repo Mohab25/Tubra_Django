@@ -1,7 +1,7 @@
 from rest_framework import serializers 
 from rest_framework_gis.serializers import GeoFeatureModelSerializer
 from .models import Aerodrome_Part
-from .models import Aerodrome_Entity, Aerodrome_Utility_Pole, Pavement_Construction, Aerodrome_Utility_Electric_Cable, Aerodrome_Utility_Water_Line, Aerodrome_Utility_Gas_Line, Aerodrome_Utility_Sewage_Line, Aerodrome_Entity_Image
+from .models import Aerodrome_Entity, Aerodrome_Utility_Pole, Pavement, Aerodrome_Utility_Electric_Cable, Aerodrome_Utility_Water_Line, Aerodrome_Utility_Gas_Line, Aerodrome_Utility_Sewage_Line, Aerodrome_Entity_Image
 
 class Aerodrome_Part_Serializer(serializers.ModelSerializer):
     Aerodrome_Entity = serializers.StringRelatedField(many=True, read_only=True)
@@ -10,7 +10,7 @@ class Aerodrome_Part_Serializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class FeatureSerializer(GeoFeatureModelSerializer):
-    # Pavement_Construction_set = serializers.SlugRelatedField(slug_field='Pavement_Name',many=True, read_only=True)
+    # Pavement_set = serializers.SlugRelatedField(slug_field='Pavement_Name',many=True, read_only=True)
     # Aerodrome_Utility_Pole_set = serializers.PrimaryKeyRelatedField(read_only=True,many=True,allow_null=True)
     # Aerodrome_Utility_Electric_Cable_set = serializers.PrimaryKeyRelatedField(read_only=True,many=True,allow_null=True)
     # Aerodrome_Utility_Water_Line_set = serializers.PrimaryKeyRelatedField(read_only=True,many=True,allow_null=True)
@@ -25,13 +25,13 @@ class FeatureSerializer(GeoFeatureModelSerializer):
     class Meta:
         model = Aerodrome_Entity 
         geo_field = 'geom'
-        fields=['Aerodrome','Feature_Name','Aerodrome_Part_ID','Category','Elevation','geom','Entity_Condition','Survey_Date','Description','pavement_construction_set','aerodrome_utility_pole_set','aerodrome_utility_electric_cable_set','aerodrome_utility_water_line_set','aerodrome_utility_gas_line_set','aerodrome_utility_sewage_line_set','aerodrome_entity_image_set','Reports']
+        fields=['Aerodrome','Feature_Name','Aerodrome_Part_ID','Category','Elevation','geom','Entity_Condition','Survey_Date','Description','Pavement_set','aerodrome_utility_pole_set','aerodrome_utility_electric_cable_set','aerodrome_utility_water_line_set','aerodrome_utility_gas_line_set','aerodrome_utility_sewage_line_set','aerodrome_entity_image_set','Reports']
 
-class Pavement_Construction_Serializer(GeoFeatureModelSerializer):
+class Pavement_Serializer(GeoFeatureModelSerializer):
     #Aerodrome_Entity = serializers.SlugRelatedField(slug_field='Feature_Name',read_only=True) # this will be the same as StringRelatedField because the __str__ method of the Aerodrome_Entity returns the Feature_Name
     Aerodrome_Entity = FeatureSerializer()
     class Meta:
-        model = Pavement_Construction
+        model = Pavement
         geo_field = 'Pavement_geom'
         fields = '__all__'
     

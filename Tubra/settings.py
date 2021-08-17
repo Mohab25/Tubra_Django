@@ -94,7 +94,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME':'tubra',
-        'USERNAME':'postgres',
+        'USER':'mohab',
         'PASSWORD':'m1k2h3',
         'HOST':'localhost',
         'PORT':'5432',
@@ -142,16 +142,21 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static','')
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media','')
-MEDIA_URL='/media/'
+MEDIA_URL='http://ec2-18-118-61-96.us-east-2.compute.amazonaws.com/media/'
 
 # CORS 
+CORS_ORIGIN_ALLOW_ALL= False
+CORS_ALLOW_CREDENTIALS = True
+
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000'
-] 
+    'http://tubra-react.s3-website.us-east-2.amazonaws.com',
+    'http://localhost:3000',
+]
+
+
 # CORS_ORIGIN_WHITELIST =[
 #     'http://localhost:3000'
 # ]
-# CORS_ORIGIN_ALLOW_ALL=True
 
 LEAFLET_CONFIG={
     'DEFAULT_ZOOM':5

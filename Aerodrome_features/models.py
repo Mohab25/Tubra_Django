@@ -1,30 +1,52 @@
 from django.contrib.gis.db import models
 from Aerodrome.models import Aerodrome
 
+class Aerodrome_Entity_Category(models.Model):
+    Name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.Name
+    
+    class Meta:
+        ordering=['Name']
+        verbose_name_plural = "Aerodrome Entity Categories"
+
 class Aerodrome_Part(models.Model):
     Name = models.CharField(max_length=200)
-    geom = models.PolygonField()
-    # for str the model name will be returned, for ordering no particular order is required.
+    category = models.ManyToManyField(Aerodrome_Entity_Category)
+
+    def __str__(self):
+        return self.Name
+
+    class Meta:
+      ordering = ['Name']  
+      verbose_name_plural = "Aerodrome Parts"
 
 class Aerodrome_Entity(models.Model):
     Aerodrome= models.ForeignKey(Aerodrome, related_name='Aerodrome_Entity', null=True, on_delete=models.SET_NULL)
     Feature_Name = models.CharField(max_length=500,null=True)
-    Aerodrome_Part_ID = models.ForeignKey(Aerodrome_Part,null=True,on_delete=models.SET_NULL)
-    Category = models.CharField(max_length=300,null=True)
+    Aerodrome_Part = models.ForeignKey(Aerodrome_Part,null=True,on_delete=models.SET_NULL)
     Elevation = models.FloatField(null=True)
-    geom =  models.GeometryField(null=True)
     Entity_Condition = models.CharField(max_length=100,null=True)
     Survey_Date = models.DateField(null=True)
     Description = models.TextField(null=True)
 
     class Meta:
-        ordering=['id']
+        ordering=['Feature_Name']
+        verbose_name_plural = "Aerodrome Entities"
     
-    # def __str__(self)->str:
-    #     str(self.id)
+    def __str__(self)->str:
+        str(self.Feature_Name)
 
+class Aerodrome_Entity_geometry(models.Model):
+    Entity = models.ForeignKey(Aerodrome_Entity, related_name='Entity_Geometry', on_delete=models.CASCADE)
+    geom =  models.GeometryField()
 
-class Pavement_Construction(models.Model):
+    class Meta:
+        ordering=['Entity']
+        verbose_name_plural = "Aerodrome Entities Geometries"
+
+class Pavement(models.Model):
     Aerodrome_Entity = models.ForeignKey(Aerodrome_Entity,null=True,on_delete=models.SET_NULL)
     Pavement_Name = models.CharField(max_length=100)
     Width = models.FloatField(null=True)
@@ -49,11 +71,23 @@ class Pavement_Construction(models.Model):
     Wearing_Thickness = models.FloatField(null=True)
     Drainage_Longitudinal_Slope = models.FloatField(null=True)
     Drainage_Cross_Slope = models.FloatField(null=True) 
-    Pavement_geom = models.MultiPolygonField() # set Aerodrome geom to null.
+    
+
+    def __str__(self):
+        return self.Pavement_Name
 
     class Meta:
         ordering=['Pavement_Name']
-    
+        verbose_name_plural = "Pavements"
+
+class Pavement_geometry(models.Model):
+    pavement = models.ForeignKey(Pavement,related_name='Pavement_geometry', on_delete=models.CASCADE)
+    geom = models.GeometryField()
+
+    class Meta:
+        ordering=['pavement']
+        verbose_name_plural = "Pavements Geometries"
+        
 
 class Aerodrome_Utility_Pole(models.Model):
     Aerodrome_Entity = models.ForeignKey(Aerodrome_Entity,null=True,on_delete=models.SET_NULL)
@@ -98,6 +132,7 @@ class Aerodrome_Entity_Image(models.Model):
 
     class Meta:
         ordering=['id']
+        verbose_name_plural = "Aerodrome Entities Images"
     
     def __str__(self):
         return self.Name

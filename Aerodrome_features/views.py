@@ -37,20 +37,20 @@ class AerodromeFeaturesDetailsView(generics.RetrieveUpdateDestroyAPIView):
     name = 'aerodrome_entity-detail'
 
 class AerodromeFeaturesPavementConstructions(generics.ListCreateAPIView):
-    queryset = Pavement_Construction.objects.all()
-    serializer_class = Pavement_Construction_Serializer
-    name = 'pavement_constructions'
+    queryset = Pavement.objects.all()
+    serializer_class = Pavement_Serializer
+    name = 'Pavements'
 
 
 class AerodromeFeaturesPavementConstructionDetails(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Pavement_Construction.objects.all()
-    serializer_class = Pavement_Construction_Serializer
-    name = 'pavement_construction-details'
+    queryset = Pavement.objects.all()
+    serializer_class = Pavement_Serializer
+    name = 'Pavement-details'
 
-class AerodromeFeaturesPOI(generics.ListCreateAPIView):
-    queryset = Aerodrome_Entity.objects.filter(Aerodrome=1).exclude(Category='Aerodrome Builds')
-    serializer_class = FeatureSerializer
-    name = 'aerodrome_entity_poi-list'
+# class AerodromeFeaturesPOI(generics.ListCreateAPIView):
+#     queryset = Aerodrome_Entity.objects.filter(Aerodrome=1).exclude(Aerodrome_Part='Aerodrome Builds')
+#     serializer_class = FeatureSerializer
+#     name = 'aerodrome_entity_poi-list'
 
 class Aerodrome_Entity_Image_Detail_View(generics.RetrieveUpdateDestroyAPIView):
     queryset = Aerodrome_Entity.objects.all()

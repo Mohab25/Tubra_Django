@@ -8,7 +8,12 @@ class DrawingSeriesSerializer(serializers.HyperlinkedModelSerializer):
         model = DrawingSeries
         fields='__all__'
 
-class DrawingsSerializer(serializers.HyperlinkedModelSerializer):
+class DrawingsListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Drawing
+        fields = '__all__'
+
+class DrawingsDetailsSerializer(serializers.HyperlinkedModelSerializer):
     id = serializers.ReadOnlyField()
     class Meta:
         model = Drawing 
