@@ -136,3 +136,20 @@ class Aerodrome_Entity_Image(models.Model):
     
     def __str__(self):
         return self.Name
+
+class Ob_airport(models.Model):
+    objectid = models.IntegerField()
+    shape_leng = models.FloatField()
+    shape_le_1 = models.FloatField()
+    shape_area = models.FloatField()
+    geom = models.MultiPolygonField(srid=4326)
+
+    def __str__(self) -> str:
+        return self.id
+
+class airport_parts(models.Model):
+    name = models.CharField(max_length=50)
+    geom = models.MultiPolygonField(srid=4326)
+
+    def __str__(self):
+        return self.name
