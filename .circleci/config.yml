@@ -21,10 +21,7 @@ jobs:
           python manage.py migrate 
   db:
     docker:
-      - image: circleci/postgres:latest-postgis
-    ports:
-      - "5432:5432"
-    
+      - image: circleci/postgres:latest-postgis    
     environment:
       - POSTGRES_USER=root
       - POSTGRES_DBNAME=circleci_test
