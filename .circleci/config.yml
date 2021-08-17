@@ -22,7 +22,6 @@ jobs:
   db:
     docker:
       - image: circleci/postgres:latest-postgis
-    restart: always
     ports:
       - "5432:5432"
     
