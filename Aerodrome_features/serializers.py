@@ -1,7 +1,6 @@
 from rest_framework import serializers 
 from rest_framework_gis.serializers import GeoFeatureModelSerializer
-from .models import Aerodrome_Part
-from .models import Aerodrome_Entity, Aerodrome_Utility_Pole, Pavement, Aerodrome_Utility_Electric_Cable, Aerodrome_Utility_Water_Line, Aerodrome_Utility_Gas_Line, Aerodrome_Utility_Sewage_Line, Aerodrome_Entity_Image
+from .models import *
 
 class Aerodrome_Part_Serializer(serializers.ModelSerializer):
     Aerodrome_Entity = serializers.StringRelatedField(many=True, read_only=True)
@@ -66,4 +65,9 @@ class Aerodrome_Entity_Image_Serializer(serializers.ModelSerializer):
         fields='__all__'
 
 # class CAD_Drawings_Serializer(serializers.ModelSerializer):
-    
+
+class Obeid_Aerodrome_Parts_Serializer(GeoFeatureModelSerializer):
+    class Meta:
+        model = airport_parts
+        geo_field='geom'
+        fields='__all__'

@@ -11,3 +11,8 @@ class DocumentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Document
         fields=('pk','url','Name','Document_file','Aerodrome_Entity','Document_type')
+
+class ObeidDocumentsSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Document
+        fields=('pk','url','Name','Document_file','Aerodrome_Entity')

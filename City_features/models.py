@@ -58,10 +58,10 @@ class Obeid_districts(models.Model):
         return self.e_name
 
 class Obeid_streets(models.Model):
-    name = models.CharField(max_length=20)
-    type = models.CharField(max_length=15)
-    material = models.CharField(max_length=15)
-    quality = models.CharField(max_length=40)
+    name = models.CharField(max_length=20, null=True)
+    type = models.CharField(max_length=15, null=True)
+    material = models.CharField(max_length=15, null=True)
+    quality = models.CharField(max_length=40, null=True)
     shape_leng = models.FloatField()
     geom = models.MultiLineStringField(srid=4326)
 

@@ -94,3 +94,9 @@ def get_fields_name_for_forms(req,modelName):
         names.append(re.sub(r'\s+','',i))
     names=json.dumps({'form_titles':names})
     return HttpResponse(names)
+
+
+class Obeid_Aerodrome_Parts(generics.ListCreateAPIView):
+    queryset = airport_parts.objects.all()
+    serializer_class = Obeid_Aerodrome_Parts_Serializer
+    name = 'Obeid_Aerodrome_Parts'

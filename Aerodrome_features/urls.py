@@ -3,6 +3,7 @@ from .views import *
 
 urlpatterns=[
     path('features/',AerodromeFeaturesListView.as_view(),name='Aerodrome Features'),
+    path('obeid_aerodrome_parts/',Obeid_Aerodrome_Parts.as_view(),name='Obeid_Aerodrome_Parts'),
     re_path(r'feature/(?P<pk>\d+)/$',AerodromeFeaturesDetailsView.as_view(),name='aerodrome_entity-detail'),
     #path('features_poi/',AerodromeFeaturesPOI.as_view(),name='Aerodrome Features POIs'),
     path('pavements/',AerodromeFeaturesPavementConstructions.as_view(),name='pavement-constructions'),   

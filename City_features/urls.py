@@ -10,5 +10,8 @@ urlpatterns=[
     re_path(r'city_street/(?P<pk>\d+)/$',Streets_details.as_view(),name='city_streets-detail'),
     path('city_districts/',Districts_List.as_view(),name='city_districts-list'),
     re_path(r'city_district/(?P<pk>\d+)/$',Districts_details.as_view(),name='city_districts-detail'),
+    path('obeid_districts/',Obeid_districts.as_view(),name='Obeid_districts-list'),
+    path('obeid_streets/',Obeid_streets.as_view(),name='Obeid_streets-list'),
+    path('obeid_urban_area/',Obeid_urban_areas.as_view(),name='Obeid_urban_areas-list'),
 
 ]

@@ -32,7 +32,8 @@ class Aerodrome_Utility_Sewage_Line_Admin(admin.ModelAdmin):
 class Aerodrome_Entity_Image_Admin(admin.ModelAdmin):
     list_display = [field.name for field in Aerodrome_Entity_Image._meta.fields]
 
-
+class Obeid_Airport_parts_admin(admin.ModelAdmin):
+    list_display = [field.name for field in airport_parts._meta.fields]
 
 admin.site.register(Aerodrome_Entity_Category,Aerodrome_Entity_Category_Admin)
 admin.site.register(Aerodrome_Part,Aerodrome_Part_Admin)
@@ -44,3 +45,4 @@ admin.site.register(Aerodrome_Utility_Water_Line,Aerodrome_Utility_Water_Line_Ad
 admin.site.register(Aerodrome_Utility_Gas_Line,Aerodrome_Utility_Gas_Line_Admin)
 admin.site.register(Aerodrome_Utility_Sewage_Line,Aerodrome_Utility_Sewage_Line_Admin)
 admin.site.register(Aerodrome_Entity_Image,Aerodrome_Entity_Image_Admin)
+admin.site.register(airport_parts,Obeid_Airport_parts_admin)
