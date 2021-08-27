@@ -3,7 +3,6 @@ from rest_framework_gis.serializers import GeoFeatureModelSerializer
 from .models import *
 
 class Aerodrome_Part_Serializer(serializers.ModelSerializer):
-    Aerodrome_Entity = serializers.StringRelatedField(many=True, read_only=True)
     class Meta:
         model = Aerodrome_Part
         fields = '__all__'
@@ -71,3 +70,9 @@ class Obeid_Aerodrome_Parts_Serializer(GeoFeatureModelSerializer):
         model = airport_parts
         geo_field='geom'
         fields='__all__'
+
+class POIsSerializer(GeoFeatureModelSerializer):
+    class Meta:
+        model = POIs
+        geo_field = 'geom'
+        fields = '__all__'

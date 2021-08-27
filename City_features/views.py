@@ -54,6 +54,17 @@ class Obeid_streets(ListCreateAPIView):
     name = 'Obeid_streets'
 
 class Obeid_urban_areas(ListCreateAPIView):
-    queryset = Ob_urban_area.objects.all()
     serializer_class = Obeid_urban_areas_Serializer
     name = 'Obeid_urban_areas'
+
+    def get_queryset(self):
+        limit = self.request.query_params.get('limit')
+        limit=int(limit)
+        offset = self.request.query_params.get('offset')
+        offset= int(offset)
+        if isinstance(limit,int) and isinstance(offset,int) :
+            queryset = Ob_urban_area.objects.all()[offset:offset+limit]
+            #print(queryset) 
+            return queryset
+        else:
+            pass

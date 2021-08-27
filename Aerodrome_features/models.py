@@ -153,3 +153,16 @@ class airport_parts(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class POIs(models.Model):
+    point = models.CharField(max_length=300)
+    ellipsoid = models.FloatField(null=True, blank=True)
+    altitude_EGM96 = models.FloatField(null=True, blank=True)
+    type = models.CharField(max_length=300,null=True, blank=True)
+    geom = models.MultiPointField(srid=4326)
+
+    def __str__(self) -> str:
+        return self.point
+    class Meta:
+        verbose_name_plural = 'POIs'

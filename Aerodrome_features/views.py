@@ -100,3 +100,8 @@ class Obeid_Aerodrome_Parts(generics.ListCreateAPIView):
     queryset = airport_parts.objects.all()
     serializer_class = Obeid_Aerodrome_Parts_Serializer
     name = 'Obeid_Aerodrome_Parts'
+
+class POIsView(generics.ListCreateAPIView):
+    queryset = POIs.objects.all()
+    serializer_class = POIsSerializer
+    name='pois'

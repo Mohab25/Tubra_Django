@@ -6,6 +6,11 @@ from .serializers import *
 from .file_reader import DataReader
 import json
 
+class ObeidAllRunwayDocsList(ListCreateAPIView):
+    queryset = Document.objects.filter(aerodrome_part__Name__iexact='runway')
+    serializer_class = ObeidDocumentsSerializer
+    name='obeid_all_runway_docs-list'
+
 class ObeidRunwayPDFDocsList(ListCreateAPIView):
     queryset = Document.objects.filter(aerodrome_part__Name__iexact='runway',Document_type__Doc_type__iexact='pdf')
     serializer_class = ObeidDocumentsSerializer
@@ -20,6 +25,13 @@ class ObeidRunwayExcelDocsList(ListCreateAPIView):
     queryset = Document.objects.filter(aerodrome_part__Name__iexact='runway',Document_type__Doc_type__iexact='excel')
     serializer_class = ObeidDocumentsSerializer
     name='obeid_runway_excel_docs-list'
+
+
+class ObeidAllTaxiwayDocsList(ListCreateAPIView):
+    queryset = Document.objects.filter(aerodrome_part__Name__iexact='taxiway')
+    serializer_class = ObeidDocumentsSerializer
+    name='obeid_all_taxiway_docs-list'
+
 
 class ObeidTaxiwayPDFDocsList(ListCreateAPIView):
     queryset = Document.objects.filter(aerodrome_part__Name__iexact='taxiway',Document_type__Doc_type__iexact='pdf')
@@ -37,6 +49,11 @@ class ObeidTaxiwayExcelDocsList(ListCreateAPIView):
     name='obeid_taxiway_excel_docs-list'
 
 
+class ObeidAllApronDocsList(ListCreateAPIView):
+    queryset = Document.objects.filter(aerodrome_part__Name__iexact='apron')
+    serializer_class = ObeidDocumentsSerializer
+    name='obeid_all_Apron_docs-list'
+
 class ObeidApronPDFDocsList(ListCreateAPIView):
     queryset = Document.objects.filter(aerodrome_part__Name__iexact='apron',Document_type__Doc_type__iexact='pdf')
     serializer_class = ObeidDocumentsSerializer
@@ -53,6 +70,12 @@ class ObeidApronExcelDocsList(ListCreateAPIView):
     name='obeid_apron_excel_docs-list'
 
 
+class ObeidAllGeneralDocsList(ListCreateAPIView):
+    queryset = Document.objects.filter(aerodrome_part__Name__iexact='general')
+    serializer_class = ObeidDocumentsSerializer
+    name='obeid_all_general_docs-list'
+
+
 class ObeidGeneralPDFDocsList(ListCreateAPIView):
     queryset = Document.objects.filter(aerodrome_part__Name__iexact='general',Document_type__Doc_type__iexact='pdf')
     serializer_class = ObeidDocumentsSerializer
@@ -67,6 +90,12 @@ class ObeidGeneralExcelDocsList(ListCreateAPIView):
     queryset = Document.objects.filter(aerodrome_part__Name__iexact='general',Document_type__Doc_type__iexact='excel')
     serializer_class = ObeidDocumentsSerializer
     name='obeid_general_excel_docs-list'
+
+
+class ObeidAllReportsDocsList(ListCreateAPIView):
+    queryset = Document.objects.filter(aerodrome_part__Name__iexact='report')
+    serializer_class = ObeidDocumentsSerializer
+    name='obeid_all_reports_docs-list'
 
 
 class ObeidReportsPDFDocsList(ListCreateAPIView):

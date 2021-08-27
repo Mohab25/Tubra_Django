@@ -1,5 +1,5 @@
 from django.contrib.gis.utils import LayerMapping
-from .models import Ob_airport, airport_parts 
+from .models import * 
 
 ob_airport_mapping = {
     'objectid': 'OBJECTID',
@@ -14,11 +14,19 @@ airport_parts_mapping = {
     'geom': 'MULTIPOLYGON',
 }
 
+poi_mapping = {
+    'point': 'Point',
+    'ellipsoid': 'Ellipsoid',
+    'altitude_EGM96': 'Altitude E',
+    'type': 'Type',
+    'geom': 'MULTIPOINT',
+}
+
 
 def loader():
-    ob_airport = '/home/mohab/Main Folder/Airport/nash/Airport/Obied Airport/Tubra/Shapefiles/Ob_airport.shp'
-    lm1 = LayerMapping(Ob_airport,ob_airport,ob_airport_mapping,transform=True,encoding='utf-8')
+    shp = '/home/mohab/Main Folder/Airport/nash/Airport/Obied Airport/Tubra/Shapefiles/test/obeid POIs.shp'
+    lm1 = LayerMapping(POIs,shp,poi_mapping,transform=True,encoding='utf-8')
     lm1.save()
-    ob_airport_parts = '/home/mohab/Main Folder/Airport/nash/Airport/Obied Airport/Tubra/Shapefiles/test/airport parts.shp'
-    lm1 = LayerMapping(airport_parts,ob_airport_parts,airport_parts_mapping,transform=True,encoding='utf-8')
-    lm1.save()
+    # ob_airport_parts = '/home/mohab/Main Folder/Airport/nash/Airport/Obied Airport/Tubra/Shapefiles/test/airport parts.shp'
+    # lm1 = LayerMapping(airport_parts,ob_airport_parts,airport_parts_mapping,transform=True,encoding='utf-8')
+    # lm1.save()
