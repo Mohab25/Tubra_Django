@@ -1,6 +1,6 @@
 import psycopg2
 import json 
-connection = psycopg2.connect(host='localhost',port='5432',database='tubra',user='mohab',password='m1k2h3')
+
 
 def make_buffer(geom,radius=100):
     print('request data:',geom)
