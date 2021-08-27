@@ -1,5 +1,6 @@
 from rest_framework.serializers import *
-from .models import City_Blocks, City_Facility, City_Streets, City_Districts
+from rest_framework_gis.serializers import GeoFeatureModelSerializer
+from .models import *
 
 class City_Facilities_List_Serializer(HyperlinkedModelSerializer):
     city_facilities = HyperlinkedRelatedField(read_only=True,view_name='city_facility-list')
@@ -50,3 +51,21 @@ class City_Districts_Details_Serializer(HyperlinkedModelSerializer):
     class Meta: 
         model=City_Districts
         fields = '__all__'
+
+class Obeid_districts_Serializer(GeoFeatureModelSerializer):
+    class Meta:
+        model = Obeid_districts
+        geo_field='geom'
+        fields='__all__' 
+
+class Obeid_streets_Serializer(GeoFeatureModelSerializer):
+    class Meta:
+        model = Obeid_streets
+        geo_field='geom'
+        fields='__all__' 
+
+class Obeid_urban_areas_Serializer(GeoFeatureModelSerializer):
+    class Meta:
+        model = Ob_urban_area
+        geo_field='geom'
+        fields='__all__' 

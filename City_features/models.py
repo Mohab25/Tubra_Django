@@ -45,3 +45,33 @@ class City_Districts(models.Model):
     geom = models.MultiPolygonField(null=True)
     class Meta:
         ordering=['id']
+
+
+class Obeid_districts(models.Model):
+    name = models.CharField(max_length=50)
+    e_name = models.CharField(max_length=70)
+    shape_leng = models.FloatField()
+    shape_area = models.FloatField()
+    geom = models.MultiPolygonField(srid=4326)
+
+    def __str__(self):
+        return self.e_name
+
+class Obeid_streets(models.Model):
+    name = models.CharField(max_length=20, null=True)
+    type = models.CharField(max_length=15, null=True)
+    material = models.CharField(max_length=15, null=True)
+    quality = models.CharField(max_length=40, null=True)
+    shape_leng = models.FloatField()
+    geom = models.MultiLineStringField(srid=4326)
+
+    def __str__(self):
+        return self.id
+
+class Ob_urban_area(models.Model):
+    shape_leng = models.FloatField()
+    shape_area = models.FloatField()
+    geom = models.MultiPolygonField(srid=4326)
+
+    def __str__(self) -> str:
+        return self.id

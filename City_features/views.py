@@ -42,3 +42,29 @@ class Districts_details(RetrieveUpdateDestroyAPIView):
     queryset = City_Districts.objects.all()
     serializer_class = City_Districts_Details_Serializer
     name = 'city_districts-detail'
+
+class Obeid_districts(ListCreateAPIView):
+    queryset = Obeid_districts.objects.all()
+    serializer_class = Obeid_districts_Serializer
+    name = 'Obeid_districts'
+
+class Obeid_streets(ListCreateAPIView):
+    queryset = Obeid_streets.objects.all()
+    serializer_class = Obeid_streets_Serializer
+    name = 'Obeid_streets'
+
+class Obeid_urban_areas(ListCreateAPIView):
+    serializer_class = Obeid_urban_areas_Serializer
+    name = 'Obeid_urban_areas'
+
+    def get_queryset(self):
+        limit = self.request.query_params.get('limit')
+        limit=int(limit)
+        offset = self.request.query_params.get('offset')
+        offset= int(offset)
+        if isinstance(limit,int) and isinstance(offset,int) :
+            queryset = Ob_urban_area.objects.all()[offset:offset+limit]
+            #print(queryset) 
+            return queryset
+        else:
+            pass

@@ -37,20 +37,20 @@ class AerodromeFeaturesDetailsView(generics.RetrieveUpdateDestroyAPIView):
     name = 'aerodrome_entity-detail'
 
 class AerodromeFeaturesPavementConstructions(generics.ListCreateAPIView):
-    queryset = Pavement_Construction.objects.all()
-    serializer_class = Pavement_Construction_Serializer
-    name = 'pavement_constructions'
+    queryset = Pavement.objects.all()
+    serializer_class = Pavement_Serializer
+    name = 'Pavements'
 
 
 class AerodromeFeaturesPavementConstructionDetails(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Pavement_Construction.objects.all()
-    serializer_class = Pavement_Construction_Serializer
-    name = 'pavement_construction-details'
+    queryset = Pavement.objects.all()
+    serializer_class = Pavement_Serializer
+    name = 'Pavement-details'
 
-class AerodromeFeaturesPOI(generics.ListCreateAPIView):
-    queryset = Aerodrome_Entity.objects.filter(Aerodrome=1).exclude(Category='Aerodrome Builds')
-    serializer_class = FeatureSerializer
-    name = 'aerodrome_entity_poi-list'
+# class AerodromeFeaturesPOI(generics.ListCreateAPIView):
+#     queryset = Aerodrome_Entity.objects.filter(Aerodrome=1).exclude(Aerodrome_Part='Aerodrome Builds')
+#     serializer_class = FeatureSerializer
+#     name = 'aerodrome_entity_poi-list'
 
 class Aerodrome_Entity_Image_Detail_View(generics.RetrieveUpdateDestroyAPIView):
     queryset = Aerodrome_Entity.objects.all()
@@ -94,3 +94,14 @@ def get_fields_name_for_forms(req,modelName):
         names.append(re.sub(r'\s+','',i))
     names=json.dumps({'form_titles':names})
     return HttpResponse(names)
+
+
+class Obeid_Aerodrome_Parts(generics.ListCreateAPIView):
+    queryset = airport_parts.objects.all()
+    serializer_class = Obeid_Aerodrome_Parts_Serializer
+    name = 'Obeid_Aerodrome_Parts'
+
+class POIsView(generics.ListCreateAPIView):
+    queryset = POIs.objects.all()
+    serializer_class = POIsSerializer
+    name='pois'
