@@ -1,5 +1,5 @@
 import psycopg2
-connection = psycopg2.connect(host='localhost',port=5432,database='tubra',user='postgres',password='m1k2h3')
+connection = psycopg2.connect(host='localhost',port=5432,database='tubra',user='mohab',password='m1k2h3')
 
 def make_linear_measure(coords_1,coords_2):
     # create two points from the coords
