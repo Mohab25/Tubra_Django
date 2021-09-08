@@ -4,7 +4,7 @@ from .models import *
 class DocumentTypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Document_Type
-        fields=('pk','url','Doc_type','document_set')
+        fields=('pk','url','Doc_type')
 
 class DocumentSerializer(serializers.HyperlinkedModelSerializer):
     Document_type = DocumentTypeSerializer(read_only=True) # this will return the whole content above as an object.
