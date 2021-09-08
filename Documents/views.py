@@ -65,5 +65,5 @@ def doc_content(request,pk):
     elif doc_type=='excel':
         content = content.xlsx_reader()
     elif doc_type=='pdf':
-        content = content.pdf_reader()
+        content = json.dumps({'path':_file.Document_file.path})
     return HttpResponse(content)
