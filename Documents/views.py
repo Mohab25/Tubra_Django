@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import JsonResponse
 from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView
 from .models import *
 from .serializers import *
@@ -65,5 +66,6 @@ def doc_content(request,pk):
     elif doc_type=='excel':
         content = content.xlsx_reader()
     elif doc_type=='pdf':
-        content = json.dumps({'path':_file.Document_file.path})
-    return HttpResponse(content)
+        content = {'path':_file.Document_file.path}
+        print(content)
+    return JsonResponse(content)
