@@ -29,6 +29,6 @@ class DataReader:
 
     def pdf_reader(self):
         pdf_file_name = self.doc.Name
-        pdf_file_path = 'http://localhost:8000/media/'+pdf_file_name+'.pdf'
+        pdf_file_path = self.doc.Document_file.path
         content = json.dumps({'path':pdf_file_path})
         return content
