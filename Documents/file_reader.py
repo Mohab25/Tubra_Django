@@ -17,14 +17,14 @@ class DataReader:
             text_str +=para.text
         
         document = {'title':self.doc.Name,'content':text_str}
-        document = json.dumps(document)
+        #document = json.dumps(document)
         return document
         
     def xlsx_reader(self):
         xlsx_file = self.doc.Document_file
         xlsx_file = pandas.read_excel(xlsx_file)
         xlsx = {'title':self.doc.Name,'content':xlsx_file.to_json()}
-        xlsx = json.dumps(xlsx)
+        #xlsx = json.dumps(xlsx)
         return xlsx
 
     def pdf_reader(self):
