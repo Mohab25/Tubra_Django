@@ -67,5 +67,5 @@ def doc_content(request,pk):
         content = content.xlsx_reader()
     elif doc_type=='pdf':
         content = {'path':_file.Document_file.path}
-        print(content)
+    print(content)
     return JsonResponse(content)
